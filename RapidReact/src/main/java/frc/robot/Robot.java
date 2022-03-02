@@ -4,7 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -21,6 +24,11 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private MotorController m_leftController = new PWMSparkMax(0);
+  private MotorController m_rightController = new PWMSparkMax(1);
+  private DifferentialDrive m_differentialDrive = new DifferentialDrive(m_leftController, m_rightController);
+  private Joystick m_joystick = new Joystick(0);
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -32,8 +40,6 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-
-    
   }
 
   /**
@@ -83,7 +89,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    m_differentialDrive.arcadeDrive(m_joystick.getRawAxis(0), m_joystick.getRawAxis(1));
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
