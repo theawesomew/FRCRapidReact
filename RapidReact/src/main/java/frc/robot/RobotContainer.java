@@ -28,10 +28,7 @@ public class RobotContainer {
     }
 
     public void configureButtonBindings () {
-       new JoystickButton(m_controller, 1).toggleWhenPressed(new ParallelCommandGroup(
-           new StartEndCommand(m_intake::runIntake, m_intake::stopIntake, m_intake),
-           new StartEndCommand(m_intake::runClimb, m_intake::stopClimb, m_intake)
-       ));
+       new JoystickButton(m_controller, 1).toggleWhenPressed(new StartEndCommand(m_intake::runIntake, m_intake::stopIntake, m_intake));
 
        new JoystickButton(m_controller, 2).whenPressed(new InstantCommand(m_intake::runShooter, m_intake));
        new JoystickButton(m_controller, 2).whenReleased(new InstantCommand(m_intake::stopShooter, m_intake));
