@@ -17,20 +17,14 @@ public class Intake extends SubsystemBase {
     }
 
     public void runIntake () {
-        m_intake.set(1);
+        m_intake.set(-1);
+        m_climb.set(1);
     }
 
     public void stopIntake () {
         m_intake.set(0);
-    }
-
-    public void runClimb () {
-        m_climb.set(1);
-    }
-
-    public void stopClimb () {
         m_climb.set(0);
-    } 
+    }
 
     public void runShooter () {
         m_shoot.set(1);
