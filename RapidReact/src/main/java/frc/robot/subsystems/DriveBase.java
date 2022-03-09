@@ -20,7 +20,7 @@ public class DriveBase extends SubsystemBase {
         m_differentialDrive = new DifferentialDrive(m_leftDrive, m_rightDrive);
     }
 
-    public void tankDrive (double leftPower, double rightPower) {
-        m_differentialDrive.tankDrive(leftPower, rightPower);
+    public void arcadeDrive (double leftPower, double rightPower) {
+        m_differentialDrive.arcadeDrive(leftPower, rightPower);
     }
 }

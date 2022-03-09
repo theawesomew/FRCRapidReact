@@ -20,8 +20,8 @@ public class RobotContainer {
         m_intake = new Intake();
 
         m_driveBase.setDefaultCommand(new DefaultDrive(m_driveBase, 
-                                    () -> m_controller.getRawAxis(1), 
-                                    () -> m_controller.getRawAxis(5)));
+                                    () -> -m_controller.getRawAxis(1), 
+                                    () -> m_controller.getRawAxis(4)));
 
         configureButtonBindings();
     }
