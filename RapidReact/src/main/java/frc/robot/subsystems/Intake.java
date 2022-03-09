@@ -17,7 +17,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void runIntake () {
-        m_intake.set(-1);
+        m_intake.set(1);
         m_climb.set(1);
     }
 
