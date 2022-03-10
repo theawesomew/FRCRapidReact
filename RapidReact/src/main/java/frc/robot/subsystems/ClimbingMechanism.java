@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
@@ -18,7 +18,7 @@ public class ClimbingMechanism extends SubsystemBase {
     }
 
     public void lower () {
-        m_climb.set(1);
+        m_climb.set(-1);
     }
 
     public void stop () {
