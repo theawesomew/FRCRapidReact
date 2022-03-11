@@ -1,10 +1,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.Autonomous;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.subsystems.ClimbingMechanism;
 import frc.robot.subsystems.DriveBase;
@@ -24,8 +26,8 @@ public class RobotContainer {
         m_climb = new ClimbingMechanism();
 
         m_driveBase.setDefaultCommand(new DefaultDrive(m_driveBase, 
-                                    () -> -m_controller.getRawAxis(1), 
-                                    () -> m_controller.getRawAxis(4)));
+                                    () -> -m_controller.getRawAxis(1)/4, 
+                                    () -> m_controller.getRawAxis(4)/4));
 
         configureButtonBindings();
     }
@@ -41,5 +43,9 @@ public class RobotContainer {
 
        new Trigger(() -> (m_controller.getRawAxis(3) > 0.7)).whenActive(new InstantCommand(m_climb::lower, m_climb));
        new Trigger(() -> (m_controller.getRawAxis(3) > 0.7)).whenInactive(new InstantCommand(m_climb::stop, m_climb));
+    }
+
+    public Command getAutonomousCommand () {
+        return new Autonomous(m_driveBase, m_intake);
     }
 }

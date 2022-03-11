@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   
   private RobotContainer m_robotContainer;
+  private Command m_autoCommand;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -52,7 +54,13 @@ public class Robot extends TimedRobot {
    * chooser code above as well.
    */
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    m_autoCommand = m_robotContainer.getAutonomousCommand();
+
+    if (m_autoCommand != null) {
+      m_autoCommand.schedule();
+    }
+  }
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -60,14 +68,18 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    if (m_autoCommand != null) {
+      m_autoCommand.cancel();
+    }
+  }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {}
 
   /** This function is called once when the robot is disabled. */
-  @Override
+  @Override 
   public void disabledInit() {}
 
   /** This function is called periodically when disabled. */

@@ -23,4 +23,12 @@ public class DriveBase extends SubsystemBase {
     public void arcadeDrive (double leftPower, double rightPower) {
         m_differentialDrive.arcadeDrive(leftPower, rightPower);
     }
+
+    public void reverse () {
+        m_differentialDrive.arcadeDrive(-1, 0);
+    }
+
+    public void stop () {
+        m_differentialDrive.arcadeDrive(0, 0);
+    }
 }
