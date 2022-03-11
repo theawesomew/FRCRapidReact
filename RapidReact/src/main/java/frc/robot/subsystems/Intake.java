@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -13,7 +14,7 @@ public class Intake extends SubsystemBase {
     public Intake () {
         m_intake = new Spark(1);
         m_climb = new Spark(2);
-        m_shoot = new Spark(7);
+        m_shoot = new Talon(7);
     }
 
     public void runIntake () {
