@@ -20,8 +20,8 @@ public class Autonomous extends SequentialCommandGroup {
         m_intake = intake;
 
         addCommands(
-            new StartEndCommand(m_intake::runIntake, m_intake::stopIntake, m_intake).withTimeout(5),
-            new StartEndCommand(m_intake::runShooter, m_intake::stopShooter, m_intake).withTimeout(5)
+            new StartEndCommand(m_intake::runShooter, m_intake::stopShooter, m_intake).withTimeout(3),
+            new StartEndCommand(m_driveBase::reverse, m_driveBase::stop, m_driveBase).withTimeout(5.5)
         );
 
         addRequirements(driveBase, intake);

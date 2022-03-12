@@ -18,6 +18,7 @@ public class DriveBase extends SubsystemBase {
         m_leftDrive.setInverted(true);
 
         m_differentialDrive = new DifferentialDrive(m_leftDrive, m_rightDrive);
+        m_differentialDrive.setSafetyEnabled(false);
     }
 
     public void arcadeDrive (double leftPower, double rightPower) {
@@ -25,7 +26,7 @@ public class DriveBase extends SubsystemBase {
     }
 
     public void reverse () {
-        m_differentialDrive.arcadeDrive(-1, 0);
+        m_differentialDrive.arcadeDrive(-0.5, 0.0);
     }
 
     public void stop () {

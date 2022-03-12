@@ -18,7 +18,9 @@ public class RobotContainer {
     private Intake m_intake;
     private ClimbingMechanism m_climb;
 
-    private XboxController m_controller = new XboxController(0);
+    private XboxController m_controller_1 = new XboxController(0);
+    private XboxController m_controller_2 = new XboxController(1);
+
 
     public RobotContainer () {
         m_driveBase = new DriveBase();
@@ -26,23 +28,23 @@ public class RobotContainer {
         m_climb = new ClimbingMechanism();
 
         m_driveBase.setDefaultCommand(new DefaultDrive(m_driveBase, 
-                                    () -> -m_controller.getRawAxis(1)/4, 
-                                    () -> m_controller.getRawAxis(4)/4));
+                                    () -> -m_controller_1.getRawAxis(1), 
+                                    () -> m_controller_1.getRawAxis(4)));
 
         configureButtonBindings();
     }
 
     public void configureButtonBindings () {
-       new JoystickButton(m_controller, 1).toggleWhenPressed(new StartEndCommand(m_intake::runIntake, m_intake::stopIntake, m_intake));
+       new JoystickButton(m_controller_2, 1).toggleWhenPressed(new StartEndCommand(m_intake::runIntake, m_intake::stopIntake, m_intake));
 
-       new JoystickButton(m_controller, 2).whenPressed(new InstantCommand(m_intake::runShooter, m_intake));
-       new JoystickButton(m_controller, 2).whenReleased(new InstantCommand(m_intake::stopShooter, m_intake));
+       new JoystickButton(m_controller_2, 2).whenPressed(new InstantCommand(m_intake::runShooter, m_intake));
+       new JoystickButton(m_controller_2, 2).whenReleased(new InstantCommand(m_intake::stopShooter, m_intake));
 
-       new Trigger(() -> (m_controller.getRawAxis(2) > 0.7)).whenActive(new InstantCommand(m_climb::raise, m_climb));
-       new Trigger(() -> (m_controller.getRawAxis(2) > 0.7)).whenInactive(new InstantCommand(m_climb::stop, m_climb));
+       new Trigger(() -> (m_controller_1.getRawAxis(2) > 0.7)).whenActive(new InstantCommand(m_climb::raise, m_climb));
+       new Trigger(() -> (m_controller_1.getRawAxis(2) > 0.7)).whenInactive(new InstantCommand(m_climb::stop, m_climb));
 
-       new Trigger(() -> (m_controller.getRawAxis(3) > 0.7)).whenActive(new InstantCommand(m_climb::lower, m_climb));
-       new Trigger(() -> (m_controller.getRawAxis(3) > 0.7)).whenInactive(new InstantCommand(m_climb::stop, m_climb));
+       new Trigger(() -> (m_controller_1.getRawAxis(3) > 0.7)).whenActive(new InstantCommand(m_climb::lower, m_climb));
+       new Trigger(() -> (m_controller_1.getRawAxis(3) > 0.7)).whenInactive(new InstantCommand(m_climb::stop, m_climb));
     }
 
     public Command getAutonomousCommand () {
